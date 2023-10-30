@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase"
