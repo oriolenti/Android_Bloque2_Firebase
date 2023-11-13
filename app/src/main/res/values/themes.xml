@@ -18,7 +18,7 @@
 
         <!-- Surface color -->
         <item name= "colorSurface"> ?attr/colorSecondary</item>
-        <item name= "colorOnSurface">?attr/colorOnSecondary</item>
+        <item name= "colorOnSurface">@color/clearColor</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/baseGrey</item>
@@ -33,8 +33,15 @@
 
         <!-- Customize your theme here. -->
         <item name="toolbarStyle">@style/ModuloDosFirebase.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Theme.ModuloDosFirebase.BottomBar</item>
         <item name="materialCardViewStyle">@style/ModuloDosFirebase.CardView</item>
         <item name="textInputStyle">@style/ModuloDosFirebase.Input</item>
+    </style>
+    <style name="Theme.ModuloDosFirebase.BottomBar" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/baseGrey</item>
+        <item name="android:elevation">@dimen/shadow_elevation</item>
+        <item name="itemIconTint">@color/selectable_buttons_color</item>
+        <item name="itemRippleColor">@color/baseLightAlphaLow</item>
     </style>
 
     <style name="ModuloDosFirebase.Toolbar" parent="Widget.MaterialComponents.Toolbar">

@@ -2,4 +2,6 @@
     <string name="app_name">ModuloDosFirebase</string>
     <string name="field_email_label">Email</string>
     <string name="field_password_label">Password</string>
+    <string name="home_title">Home</string>
+    <string name="chat_title">Chat</string>
 </resources>

@@ -3,118 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/materialToolbar"
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/component_apptoolbar_container"
+            android:name="com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.fragments.components.AppToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/app_name"
+            android:layout_alignParentTop="true"
+            tools:layout="@layout/component_toolbar"
             />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_below="@+id/materialToolbar"
-            android:layout_margin="@dimen/margin_normal"
-            >
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardViewInputEmail"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/component_appbottombar_container"
+            android:name="com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.fragments.components.AppBottomBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/materialCardView"
-            android:layout_margin="@dimen/margin_normal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:startIconDrawable="@drawable/email_icon"
-                android:hint="@string/field_email_label"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardViewInputPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/materialCardViewInputEmail"
-            android:layout_margin="@dimen/margin_normal"
-            >
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:startIconDrawable="@drawable/email_icon"
-                android:hint="@string/field_password_label"
-                app:endIconMode="password_toggle"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/materialCardViewInputPassword"
-            android:layout_marginStart="@dimen/margin_normal"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:layout_marginBottom="@dimen/margin_normal"
-            android:text="Hello World!" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButtonNoShadow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/materialButton"
-            android:text="Hello World!"
-            android:layout_margin="@dimen/margin_normal"
-            />
-
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/materialFloatingButtonExtended"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/materialButtonNoShadow"
-            android:layout_margin="@dimen/margin_normal"
-            android:text="Hello World!"
-            />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/materialFloatingButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/margin_normal"
-            android:src="@drawable/add_icon"
-            app:fabSize="normal"
+            android:layout="@layout/component_bottombar"
             />
 
     </RelativeLayout>
