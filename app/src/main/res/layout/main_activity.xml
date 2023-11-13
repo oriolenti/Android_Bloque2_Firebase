@@ -19,6 +19,16 @@
             android:layout_alignParentTop="true"
             tools:layout="@layout/component_toolbar"
             />
+        
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/component_navhost_container"
+            android:name="com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.fragments.components.AppNavHost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/component_apptoolbar_container"
+            android:layout_above="@id/component_appbottombar_container"
+            tools:layout="@layout/component_navhost"
+            />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/component_appbottombar_container"
@@ -26,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout="@layout/component_bottombar"
+            tools:layout="@layout/component_bottombar"
             />
 
     </RelativeLayout>

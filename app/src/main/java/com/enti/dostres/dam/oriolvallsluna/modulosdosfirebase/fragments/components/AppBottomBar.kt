@@ -38,6 +38,20 @@ class AppBottomBar: Fragment() {
 
         bottomBar.setOnItemSelectedListener { menuItem ->
             AppToolbar.Get().toolbar.title = menuItem.title
+
+            if(menuItem.itemId != bottomBar.selectedItemId)
+            {
+                when (menuItem.itemId)
+                {
+                    R.id.home_bottom_bar_button -> {
+                        AppNavHost.Get().navHost.navigate(R.id.transition_chat_to_home)
+                    }
+
+                    R.id.chat_bottom_bar_button -> {
+                        AppNavHost.Get().navHost.navigate(R.id.transition_home_to_chat)
+                    }
+                }
+            }
             true
         }
 
