@@ -32,11 +32,19 @@
 
 
         <!-- Customize your theme here. -->
+        <item name="navigationViewStyle">@style/ModuloDosFirebase.Drawer</item>
         <item name="toolbarStyle">@style/ModuloDosFirebase.Toolbar</item>
         <item name="bottomNavigationStyle">@style/Theme.ModuloDosFirebase.BottomBar</item>
         <item name="materialCardViewStyle">@style/ModuloDosFirebase.CardView</item>
         <item name="textInputStyle">@style/ModuloDosFirebase.Input</item>
     </style>
+
+    <style name="ModuloDosFirebase.Drawer" parent="Widget.MaterialComponents.NavigationView">
+        <item name="itemIconTint">@color/baseLight</item>
+        <item name="itemTextColor">@color/baseLight</item>
+        <item name="elevation">@dimen/shadow_elevation</item>
+    </style>
+
     <style name="Theme.ModuloDosFirebase.BottomBar" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="android:background">@color/baseGrey</item>
         <item name="android:elevation">@dimen/shadow_elevation</item>

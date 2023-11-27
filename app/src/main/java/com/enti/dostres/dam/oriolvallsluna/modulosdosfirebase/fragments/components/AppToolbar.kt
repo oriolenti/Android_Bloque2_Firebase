@@ -37,6 +37,9 @@ class AppToolbar: Fragment() {
     //Se llama cuando las vistas ya están creadas
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toolbar.setNavigationOnClickListener {
+            AppDrawer.get().open()
+        }
     }
 
 }
