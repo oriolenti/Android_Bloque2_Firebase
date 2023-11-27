@@ -2,6 +2,8 @@
 <resources>
     <color name="baseGrey">#444045</color>
     <color name="lighterGrey">#666267</color>
+    <color name="darkestLight">#958A63</color>
+
     <color name="baseLight">#EDDC90</color>
     <color name="lighterLight">#F3E8C3</color>
     <color name="baseLightAlpha">#80EDDC90</color>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.R
+import com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.fragments.screens.LoginScreen
 import com.google.android.material.navigation.NavigationView
 
 class AppDrawer: Fragment() {
@@ -44,5 +45,25 @@ class AppDrawer: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        navigationDrawer.setNavigationItemSelectedListener { menuItem ->
+            when(menuItem.itemId)
+            {
+                R.id.login_drawer_button -> {
+
+                    val loginScreen = LoginScreen()
+                    val transaction = childFragmentManager.beginTransaction()
+
+                    transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
+                        .replace(R.id.reusableDialogContainer, loginScreen)
+                        .addToBackStack(null)
+                        .commit()
+
+                    drawer.closeDrawers()
+                }
+            }
+
+            true
+        }
     }
 }

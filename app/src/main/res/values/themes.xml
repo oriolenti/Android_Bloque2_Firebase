@@ -37,6 +37,9 @@
         <item name="bottomNavigationStyle">@style/Theme.ModuloDosFirebase.BottomBar</item>
         <item name="materialCardViewStyle">@style/ModuloDosFirebase.CardView</item>
         <item name="textInputStyle">@style/ModuloDosFirebase.Input</item>
+        <item name="materialButtonStyle">@style/ModuloDosFirebase.Button</item>
+        <item name="snackbarStyle">@style/ModuloDosFirebase.SnackBar</item>
+        <item name="snackbarTextViewStyle">@style/ModuloDosFirebase.SnackBar.TextView</item>
     </style>
 
     <style name="ModuloDosFirebase.Drawer" parent="Widget.MaterialComponents.NavigationView">
@@ -67,5 +70,20 @@
         <item name="boxStrokeErrorColor">@color/baseCarmin</item>
         <item name="android:textColorHint">@color/baseLight</item>
         <item name="hintTextColor">@color/lighterLight</item>
+        <item name="startIconTint">@color/baseLight</item>
+        <item name="endIconTint">@color/baseLight</item>
+    </style>
+    <style name="ModuloDosFirebase.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/baseLight</item>
+        <item name="backgroundTint">@color/baseGrey</item>
+        <item name="rippleColor">@color/darkestLight</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:elevation">@dimen/shadow_elevation</item>
+    </style>
+    <style name="ModuloDosFirebase.SnackBar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="elevation">@dimen/shadow_elevation</item>
+    </style>
+    <style name="ModuloDosFirebase.SnackBar.TextView" parent="Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textColor">@color/baseLight</item>
     </style>
 </resources>

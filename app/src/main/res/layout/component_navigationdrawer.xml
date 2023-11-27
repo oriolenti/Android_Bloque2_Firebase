@@ -41,6 +41,13 @@
             tools:layout="@layout/component_bottombar"
             />
 
+        <FrameLayout
+            android:id="@+id/reusableDialogContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/component_apptoolbar_container"
+            android:layout_alignParentBottom="true"/>
+
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
