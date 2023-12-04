@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.R
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
+import java.util.Date
 
 class AppToolbar: Fragment() {
 
@@ -40,6 +44,40 @@ class AppToolbar: Fragment() {
         toolbar.setNavigationOnClickListener {
             AppDrawer.get().open()
         }
-    }
 
+        toolbar.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.toolbar_button_test -> {
+
+                    val db = Firebase.firestore
+
+                    //Insertar cosas en BBDD
+                    val table = db.collection("Test")
+                    val newDocument = table.document()
+                    val newTestClass = TestDatabaseClass(newDocument.id, "Pruebas")
+                    newDocument
+                        .set(newTestClass)
+                        .addOnSuccessListener {
+                            Snackbar.make(AppDrawer.get().fragmentView,
+                                "Ha funcionado",
+                                Snackbar.LENGTH_LONG).show()
+                        }
+                        .addOnFailureListener {
+                            Snackbar.make(AppDrawer.get().fragmentView,
+                                "Ha fallado",
+                                //exception.message ?: "",
+                                Snackbar.LENGTH_LONG).show()
+                        }
+
+                }
+            }
+            true
+        }
+    }
 }
+
+data class  TestDatabaseClass(
+    var id: String? = null,
+    var name: String? = null,
+    var creationDate: Date? = Date()
+)

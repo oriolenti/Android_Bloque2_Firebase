@@ -2,12 +2,14 @@ package com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.fragments.screens
 
 import android.app.Activity.RESULT_OK
 import android.os.Bundle
+import android.provider.ContactsContract.Data
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.R
 import com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.clases_firebase.FB
+import com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.clases_firebase.models.DBUser
 import com.enti.dostres.dam.oriolvallsluna.modulosdosfirebase.fragments.components.AppDrawer
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -17,6 +19,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import java.util.Date
 
 class LoginScreen: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +46,6 @@ class LoginScreen: Fragment() {
         FirebaseAuthUIActivityResultContract()
     ) { res ->
         this.onSignInResult(res)
-
     }
 
     override fun onCreateView(
@@ -59,9 +61,9 @@ class LoginScreen: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        emailLoginButton.setOnClickListener {emailLogin()}
-        registerButton.setOnClickListener {startRegister()}
-        googleAuthButton.setOnClickListener {googleAuth()}
+        emailLoginButton.setOnClickListener { emailLogin() }
+        registerButton.setOnClickListener { startRegister() }
+        googleAuthButton.setOnClickListener { googleAuth() }
     }
 
     private fun emailLogin() {
@@ -103,30 +105,72 @@ class LoginScreen: Fragment() {
         signInLauncher.launch(signInIntent)
     }
 
-    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult){
-        if (result.resultCode == RESULT_OK)
-        {
 
-            parentFragmentManager.popBackStack()
+    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
 
-            FB.auth.getUser()?.let { user ->
-                Snackbar.make(AppDrawer.get().fragmentView,
-                    getString(R.string.user_login_message, user.displayName),
-                    Snackbar.LENGTH_LONG).show()
-            } ?: {
-                FB.crashlytics.logSimpleError("Login Error No User"){
-                    key("code", result.resultCode)
-                    key("data", result.toString())
-                }
-                Snackbar.make(AppDrawer.get().fragmentView,
-                    getString(R.string.login_error),
-                    Snackbar.LENGTH_LONG).show()
-            }
-        } else {
-            FB.crashlytics.logSimpleError("Login Error No User"){
+        if (result.resultCode != RESULT_OK) {
+            FB.crashlytics.logSimpleError("Login Error") {
                 key("code", result.resultCode)
                 key("data", result.toString())
             }
+            return
         }
+
+        val authUser = FB.auth.getAuthDBUser() ?: kotlin.run {
+            FB.crashlytics.logSimpleError("Login Error No User") {
+                key("code", result.resultCode)
+                key("data", result.toString())
+            }
+            sendToastError()
+            return
+        }
+
+        val id = authUser.id ?: kotlin.run {
+            FB.crashlytics.logSimpleError("Login Error No ID") {
+                key("code", result.resultCode)
+                key("data", result.toString())
+            }
+            sendToastError()
+            return
+        }
+
+        FB.db.find<DBUser>(id, authUser.getTable(),
+            onSuccess = { dbUser ->
+                dbUser.lastLogin = Date()
+
+                FB.db.save(dbUser,
+                    onSuccess = {
+                        FB.auth.setCurrentUser(dbUser)
+                        sendToastSuccessAndClose()
+                    },
+                    onFailure = {
+                        sendToastError()
+                    })
+            },
+            //User don't exist, need creation in DB
+            onFailure = {
+                FB.dc.save(authUser,
+                    onSuccess = { dbUser ->
+                        FB.auth.setCurrentUser(dbUser)
+                        sendToastSuccessAndClose()
+                    },
+                    onFailure = { exception ->
+                        sendToastError()
+                    })
+            })
+    }
+    private fun SendToastSuccessAndClose(){
+        Snackbar.make(AppDrawer.get().fragmentView,
+            getString(R.string.user_login_message, FB.auth.getUser()?.username),
+            Snackbar.LENGTH_LONG).show()
+
+        parentFragmentManager.popBackStack()
+    }
+
+    private fun sendToastError() {
+        Snackbar.make(
+            AppDrawer.get().fragmentView,
+            "Error on login",
+            Snackbar.LENGTH_LONG).show()
     }
 }
